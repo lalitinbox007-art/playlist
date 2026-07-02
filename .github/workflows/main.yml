@@ -1,3 +1,5 @@
+name: Playlist automation CI
+
 on:
   push:
     branches: [ "development" ]
@@ -24,5 +26,18 @@ jobs:
     - name: Run validation or tests
       run: npm test        # Make sure you have a "test" script defined in package.json
       
-    - name: run the application
-      run: sh /mnt/HC_Volume_105180630/deployed/run.sh
+    
+    
+  deploy:
+    needs: test
+    runs-on: self-hosted
+    steps:
+    - name: Executing remote SSH commands to deploy
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ env.SERVER_HOST }}
+        username: testuser
+        key: ${{ secrets.SSH_KEY }}
+        port: 22
+        script: |
+          sh /mnt/HC_Volume_105180630/deployed/run.sh
