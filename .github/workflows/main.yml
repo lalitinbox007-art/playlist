@@ -37,4 +37,4 @@ jobs:
         # Pulling your repository secrets into the environment variables
         SSH_KEY: ${{ secrets.SSH_KEY }}
         SSH_HOST: ${{ secrets.SERVER_HOST }}
-      run: echo "$SSH_KEY" > ~/.ssh/id_priv && ssh -i ~/.ssh/id_priv testuser@"$SSH_HOST" "sh /mnt/HC_Volume_105180630/deployed/run.sh"
+      run: echo "$SSH_KEY" > ~/.ssh/id_priv && ssh testuser@"178.104.90.70" "sh /mnt/HC_Volume_105180630/deployed/run.sh"
