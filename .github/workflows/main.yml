@@ -25,4 +25,4 @@ jobs:
       run: npm test        # Make sure you have a "test" script defined in package.json
       
     - name: run the application
-      run: nohup node server.js &
+      run: sh /mnt/HC_Volume_105180630/deployed/run.sh
