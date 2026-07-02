@@ -25,4 +25,4 @@ jobs:
       run: npm test        # Make sure you have a "test" script defined in package.json
       
     - name: run the application
-      run: nohup node . &
+      run: nohup node server.js &
