@@ -1,5 +1,3 @@
-name: Playlist project automation
-
 on:
   push:
     branches: [ "development" ]
@@ -17,7 +15,7 @@ jobs:
     - name: Set up Node.js env
       uses: actions/setup-node@v4
       with:
-        node-version: '20' # Specify your Node version here
+        node-version: '24' # Specify your Node version here
         cache: 'npm'       # Caches npm dependencies for faster runs
 
     - name: Install dependencies
@@ -25,3 +23,6 @@ jobs:
 
     - name: Run validation or tests
       run: npm test        # Make sure you have a "test" script defined in package.json
+      
+    - name: run the application
+      run: nohup node . &
