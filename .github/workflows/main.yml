@@ -32,12 +32,11 @@ jobs:
     needs: build-and-test
     runs-on: self-hosted
     steps:
-    - name: Executing remote SSH commands to deploy
-      uses: appleboy/ssh-action@v1.0.3
-      with:
-        host: ${{ env.SERVER_HOST }}
-        username: testuser
-        key: ${{ secrets.SSH_KEY }}
-        port: 22
-        script: |
-          sh /mnt/HC_Volume_105180630/deployed/run.sh
+    - name: Run Deploy Script via Native SSH
+      env:
+        # Pulling your repository secrets into the environment variables
+        SSH_KEY: ${{ secrets.SSH_KEY }}
+        SSH_HOST: ${{ env.SERVER_HOST }}
+      run: |
+      	echo "$SSH_KEY" > ~/.ssh/id_priv
+        ssh -i ~/.ssh/id_priv testuser@"$SSH_HOST" "sh /mnt/HC_Volume_105180630/deployed/run.sh"
